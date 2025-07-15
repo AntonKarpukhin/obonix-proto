@@ -1,0 +1,37 @@
+name: Proto CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-and-generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Нужно для breaking changes check
+
+      - name: Setup Buf
+        uses: bufbuild/buf-setup-action@v1
+        with:
+          github_token: ${{ github.token }}
+
+      - name: Lint proto files
+        run: buf lint
+
+      - name: Check breaking changes
+        if: github.event_name == 'pull_request'
+        run: buf breaking --against 'https://github.com/${{ github.repository }}.git#branch=main'
+
+      - name: Generate code
+        run: buf generate
+
+      - name: Upload generated artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-code
+          path: gen/

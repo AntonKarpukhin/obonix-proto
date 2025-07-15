@@ -1,0 +1,10 @@
+version: v1
+plugins:
+  # Go protobuf
+  - plugin: protoc-gen-go
+    out: gen/go
+    opt: paths=source_relative
+  # Go gRPC
+  - plugin: protoc-gen-go-grpc
+    out: gen/go
+    opt: paths=source_relative
