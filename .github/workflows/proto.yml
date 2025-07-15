@@ -40,7 +40,10 @@ jobs:
       - name: Generate code
         run: |
           export PATH="$PATH:$(go env GOPATH)/bin"
-          buf generate
+          protoc --proto_path=proto \
+            --go_out=. --go_opt=module=github.com/AntonKarpukhin/obonix-proto \
+            --go-grpc_out=. --go-grpc_opt=module=github.com/AntonKarpukhin/obonix-proto \
+            proto/auth/auth.proto
 
       - name: Upload generated artifacts
         uses: actions/upload-artifact@v4
