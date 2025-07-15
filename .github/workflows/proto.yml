@@ -15,10 +15,20 @@ jobs:
         with:
           fetch-depth: 0 # Нужно для breaking changes check
 
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.21"
+
       - name: Setup Buf
         uses: bufbuild/buf-setup-action@v1
         with:
           github_token: ${{ github.token }}
+
+      - name: Install protoc plugins
+        run: |
+          go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+          go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
 
       - name: Lint proto files
         run: buf lint
@@ -28,10 +38,12 @@ jobs:
         run: buf breaking --against 'https://github.com/${{ github.repository }}.git#branch=main'
 
       - name: Generate code
-        run: buf generate
+        run: |
+          export PATH="$PATH:$(go env GOPATH)/bin"
+          buf generate
 
       - name: Upload generated artifacts
         uses: actions/upload-artifact@v4
         with:
           name: generated-code
-          path: gen/
+          path: obonix/

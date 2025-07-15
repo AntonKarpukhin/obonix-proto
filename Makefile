@@ -2,7 +2,7 @@
 
 # Генерация всех файлов
 gen:
-	export PATH="/Users/antonkarpukhin/go/bin:$$PATH" && \
+	export PATH="$$(go env GOPATH)/bin:$$PATH" && \
 	protoc --proto_path=proto \
 		--go_out=. --go_opt=module=github.com/AntonKarpukhin/obonix-proto \
 		--go-grpc_out=. --go-grpc_opt=module=github.com/AntonKarpukhin/obonix-proto \
