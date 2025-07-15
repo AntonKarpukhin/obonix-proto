@@ -2,7 +2,11 @@
 
 # Генерация всех файлов
 gen:
-	protoc --proto_path=proto --go_out=gen/go --go_opt=paths=source_relative --go-grpc_out=gen/go --go-grpc_opt=paths=source_relative proto/auth/auth.proto
+	export PATH="/Users/antonkarpukhin/go/bin:$$PATH" && \
+	protoc --proto_path=proto \
+		--go_out=. --go_opt=module=github.com/AntonKarpukhin/obonix-proto \
+		--go-grpc_out=. --go-grpc_opt=module=github.com/AntonKarpukhin/obonix-proto \
+		proto/auth/auth.proto
 
 # Линтинг proto файлов
 lint:
@@ -14,7 +18,7 @@ breaking:
 
 # Очистка сгенерированных файлов
 clean:
-	rm -rf gen/
+	rm -rf obonix/
 
 # Установка зависимостей
 install:

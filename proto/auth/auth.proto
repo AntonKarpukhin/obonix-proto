@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package auth.v1;
+package obonix.auth.v1;
 
-option go_package = "github.com/AntonKarpukhin/obonix-proto/gen/go/auth/v1;authv1";
+option go_package = "github.com/AntonKarpukhin/obonix-proto/obonix/auth/v1;authv1";
 
 // Сервис авторизации
 service AuthService {

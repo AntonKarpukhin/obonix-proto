@@ -19,9 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AuthService_Login_FullMethodName    = "/auth.v1.AuthService/Login"
-	AuthService_Register_FullMethodName = "/auth.v1.AuthService/Register"
-	AuthService_IsAdmin_FullMethodName  = "/auth.v1.AuthService/IsAdmin"
+	AuthService_Login_FullMethodName    = "/obonix.auth.v1.AuthService/Login"
+	AuthService_Register_FullMethodName = "/obonix.auth.v1.AuthService/Register"
+	AuthService_IsAdmin_FullMethodName  = "/obonix.auth.v1.AuthService/IsAdmin"
 )
 
 // AuthServiceClient is the client API for AuthService service.
@@ -180,7 +180,7 @@ func _AuthService_IsAdmin_Handler(srv interface{}, ctx context.Context, dec func
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var AuthService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "auth.v1.AuthService",
+	ServiceName: "obonix.auth.v1.AuthService",
 	HandlerType: (*AuthServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

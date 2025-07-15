@@ -13,7 +13,8 @@ proto/
 └── ...
 
 gen/go/               # Сгенерированный Go код
-├── auth/v1/
+├── obonix/auth/v1/
+└── obonix/payment/v1/  # будущие сервисы
 └── ...
 ```
 
@@ -45,18 +46,65 @@ make breaking
 
 ## Добавление нового сервиса
 
-1. Создайте папку `proto/your-service/`
-2. Добавьте proto файлы с пакетом `your-service.v1`
-3. Запустите `make gen`
+1. Создайте папку `proto/payment/` (или другой сервис)
+2. Добавьте proto файлы с пакетом `obonix.payment.v1`
+3. Обновите Makefile команду gen для нового файла
+4. Запустите `make gen`
 
-## Использование в Go проектах
+### Пример нового сервиса payment:
+
+```protobuf
+// proto/payment/payment.proto
+syntax = "proto3";
+package obonix.payment.v1;
+option go_package = "github.com/AntonKarpukhin/obonix-proto/obonix/payment/v1;paymentv1";
+
+service PaymentService {
+  rpc ProcessPayment(PaymentRequest) returns (PaymentResponse);
+}
+```
+
+## Использование в Go проектах (Google Pattern)
+
+**Преимущества Google паттерна:**
+
+- ✅ Один `go get` для всех сервисов
+- ✅ Простое версионирование всего проекта
+- ✅ Отсутствие конфликтов зависимостей
+- ✅ Следует стандартам Google, Uber, других крупных компаний
 
 ```bash
-go get github.com/AntonKarpukhin/obonix-proto/gen/go/auth/v1
+# Один go get для всего проекта
+go get github.com/AntonKarpukhin/obonix-proto
 ```
 
 ```go
-import authv1 "github.com/AntonKarpukhin/obonix-proto/gen/go/auth/v1"
+import (
+    authv1 "github.com/AntonKarpukhin/obonix-proto/obonix/auth/v1"
+    paymentv1 "github.com/AntonKarpukhin/obonix-proto/obonix/payment/v1" // Будущие сервисы
+)
+
+// Пример использования
+func main() {
+    conn, _ := grpc.Dial("localhost:8080", grpc.WithInsecure())
+    defer conn.Close()
+
+    // Создание клиента
+    client := authv1.NewAuthServiceClient(conn)
+
+    // Вызов методов
+    loginResp, err := client.Login(context.Background(), &authv1.LoginRequest{
+        Email:    "user@obonix.com",
+        Password: "password123",
+        AppId:    1,
+    })
+
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Printf("Login successful, token: %s\n", loginResp.Token)
+}
 ```
 
 ## Версионирование

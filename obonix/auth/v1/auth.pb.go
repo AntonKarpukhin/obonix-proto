@@ -319,7 +319,7 @@ var File_auth_auth_proto protoreflect.FileDescriptor
 
 const file_auth_auth_proto_rawDesc = "" +
 	"\n" +
-	"\x0fauth/auth.proto\x12\aauth.v1\"W\n" +
+	"\x0fauth/auth.proto\x12\x0eobonix.auth.v1\"W\n" +
 	"\fLoginRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x1a\n" +
 	"\bpassword\x18\x02 \x01(\tR\bpassword\x12\x15\n" +
@@ -334,11 +334,11 @@ const file_auth_auth_proto_rawDesc = "" +
 	"\x0eIsAdminRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\",\n" +
 	"\x0fIsAdminResponse\x12\x19\n" +
-	"\bis_admin\x18\x01 \x01(\bR\aisAdmin2\xc4\x01\n" +
-	"\vAuthService\x126\n" +
-	"\x05Login\x12\x15.auth.v1.LoginRequest\x1a\x16.auth.v1.LoginResponse\x12?\n" +
-	"\bRegister\x12\x18.auth.v1.RegisterRequest\x1a\x19.auth.v1.RegisterResponse\x12<\n" +
-	"\aIsAdmin\x12\x17.auth.v1.IsAdminRequest\x1a\x18.auth.v1.IsAdminResponseB>Z<github.com/AntonKarpukhin/obonix-proto/gen/go/auth/v1;authv1b\x06proto3"
+	"\bis_admin\x18\x01 \x01(\bR\aisAdmin2\xee\x01\n" +
+	"\vAuthService\x12D\n" +
+	"\x05Login\x12\x1c.obonix.auth.v1.LoginRequest\x1a\x1d.obonix.auth.v1.LoginResponse\x12M\n" +
+	"\bRegister\x12\x1f.obonix.auth.v1.RegisterRequest\x1a .obonix.auth.v1.RegisterResponse\x12J\n" +
+	"\aIsAdmin\x12\x1e.obonix.auth.v1.IsAdminRequest\x1a\x1f.obonix.auth.v1.IsAdminResponseB>Z<github.com/AntonKarpukhin/obonix-proto/obonix/auth/v1;authv1b\x06proto3"
 
 var (
 	file_auth_auth_proto_rawDescOnce sync.Once
@@ -354,20 +354,20 @@ func file_auth_auth_proto_rawDescGZIP() []byte {
 
 var file_auth_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_auth_auth_proto_goTypes = []any{
-	(*LoginRequest)(nil),     // 0: auth.v1.LoginRequest
-	(*LoginResponse)(nil),    // 1: auth.v1.LoginResponse
-	(*RegisterRequest)(nil),  // 2: auth.v1.RegisterRequest
-	(*RegisterResponse)(nil), // 3: auth.v1.RegisterResponse
-	(*IsAdminRequest)(nil),   // 4: auth.v1.IsAdminRequest
-	(*IsAdminResponse)(nil),  // 5: auth.v1.IsAdminResponse
+	(*LoginRequest)(nil),     // 0: obonix.auth.v1.LoginRequest
+	(*LoginResponse)(nil),    // 1: obonix.auth.v1.LoginResponse
+	(*RegisterRequest)(nil),  // 2: obonix.auth.v1.RegisterRequest
+	(*RegisterResponse)(nil), // 3: obonix.auth.v1.RegisterResponse
+	(*IsAdminRequest)(nil),   // 4: obonix.auth.v1.IsAdminRequest
+	(*IsAdminResponse)(nil),  // 5: obonix.auth.v1.IsAdminResponse
 }
 var file_auth_auth_proto_depIdxs = []int32{
-	0, // 0: auth.v1.AuthService.Login:input_type -> auth.v1.LoginRequest
-	2, // 1: auth.v1.AuthService.Register:input_type -> auth.v1.RegisterRequest
-	4, // 2: auth.v1.AuthService.IsAdmin:input_type -> auth.v1.IsAdminRequest
-	1, // 3: auth.v1.AuthService.Login:output_type -> auth.v1.LoginResponse
-	3, // 4: auth.v1.AuthService.Register:output_type -> auth.v1.RegisterResponse
-	5, // 5: auth.v1.AuthService.IsAdmin:output_type -> auth.v1.IsAdminResponse
+	0, // 0: obonix.auth.v1.AuthService.Login:input_type -> obonix.auth.v1.LoginRequest
+	2, // 1: obonix.auth.v1.AuthService.Register:input_type -> obonix.auth.v1.RegisterRequest
+	4, // 2: obonix.auth.v1.AuthService.IsAdmin:input_type -> obonix.auth.v1.IsAdminRequest
+	1, // 3: obonix.auth.v1.AuthService.Login:output_type -> obonix.auth.v1.LoginResponse
+	3, // 4: obonix.auth.v1.AuthService.Register:output_type -> obonix.auth.v1.RegisterResponse
+	5, // 5: obonix.auth.v1.AuthService.IsAdmin:output_type -> obonix.auth.v1.IsAdminResponse
 	3, // [3:6] is the sub-list for method output_type
 	0, // [0:3] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
